@@ -272,11 +272,12 @@ on death of player:
 	if {piorun} is true:
 		strike lightning effect at the victim
 on explode:
-	loop blocks in radius 5:
-		if loop-block is obsidian:
-			chance of 60.0%
-			set loop-block to air
-			drop obsidian		
+	if {tntobsidian} is true:
+		loop blocks in radius 5:
+			if loop-block is obsidian:
+				chance of 60.0%
+				set loop-block to air
+				drop obsidian		
 #KONIEC KODU
 
 		
