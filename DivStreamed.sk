@@ -184,8 +184,9 @@ command /gildie [<text>] [<text>] [<text>]:
 					set {gildia.tag.%player%} to " "
 					set {gildia.%player%} to " "
 					set {gildia.gracz.%player%} to false
+					make player execute command "/ne clear %{gildia.%player%.gracze::*}%"
 					remove all players from {gildia.%player%.gracze::*}
-					make player execute command "/ne clear %{gildia.%player%.gracze::*}% "
+					make player execute command "/ne clear %player%"
 					broadcast "&2Gracz &6%player% &2usunal gildie &6%{gildia.%player%}%. &6Bardzo nam przykro :("
 					execute console command "/pex user %player% remove *"
 					Clear {gildia.%arg 2%.gracze::*}
@@ -268,7 +269,7 @@ on death of player:
 	if {piorun} is true:
 		strike lightning effect at the victim
 on explode:
-	if %{tntobsidian}% is true:
+	if {tntobsidian} is true:
 		loop blocks in radius 5:
 			if loop-block is obsidian:
 				chance of 60.0%
