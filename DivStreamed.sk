@@ -1,0 +1,283 @@
+#============================================
+#________  .__                                  
+#\______ \ |__|__  __  
+ #|    |  \|  \  \/ / 
+ #|    `   \  |\   / 
+#/_______  /__| \_/  
+#
+#============================================
+#= GILDIE SĄ WŁASNOŚCIĄ Diverse, PUBLIKOWANIE =
+#= SKRYPTU BEZ ZGODY AUTORA JEST ZABRONIONE! =
+#= OWY SKRYPT JEST TYLKO PROJEKTEM KTÓRY NIE =
+#= MIAŁ UJŻEĆ ŚWIATŁA DZIENNEGO! =
+#============================================
+options:
+	version: 0.7
+#====================KOD=====================
+		
+
+on skript load:
+	set {payitem-slot-1} to value "payitem-slot-1" get of "plugins/DivGuild/config.yml" parsed as item type
+	set {payitem-slot-2} to value "payitem-slot-2" get of "plugins/DivGuild/config.yml" parsed as item type
+	set {payitem-slot-3} to value "payitem-slot-3" get of "plugins/DivGuild/config.yml" parsed as item type
+	set {payitem-slot-4} to value "payitem-slot-4" get of "plugins/DivGuild/config.yml" parsed as item type
+	set {payitem-slot-5} to value "payitem-slot-5" get of "plugins/DivGuild/config.yml" parsed as item type
+	set {payitem-slot-6} to value "payitem-slot-6" get of "plugins/DivGuild/config.yml" parsed as item type
+	set {nazwa} to value "nazwa" get of "plugins/DivGuild/config.yml"
+	set {swiat} to value "swiat" get of "plugins/DivGuild/config.yml"
+	set {promien} to value "promien" get of "plugins/DivGuild/config.yml" parsed as integer
+	set {ustawblok} to value "ustawblok" get of "plugins/DivGuild/config.yml" parsed as boolean
+	set {piorun} to value "piorun" get of "plugins/DivGuild/config.yml" parsed as boolean
+	set {version} to value "version" get of "plugins/DivGuild/config.yml" parsed as integer
+	set {wersja.ja} to text from url "https://raw.github.com/glaca98xd/DivGuild/DivGuild/Files/version.xml"
+on script load:
+	set {payitem-slot-1} to {payitem-slot-1.fromConfig}
+				
+	if folder in "plugins/divGuildLOG" is not exists:
+		send "[divGuild] Folder divGuildLOG nie istnieje... Generowanie..." to console
+		generate folder named "plugins/divGuildLOG"
+		send "[divGuild] Wygenerowano!" to console
+	send "===========================" to the console
+	send "==       +DivGuild+      ==" to the console
+	send "===========================" to the console
+command /gildie [<text>] [<text>] [<text>]:
+	aliases: g, faction, guilds, guild, gildia
+	permission: dvr.guilds
+	trigger:
+		if arg 1 is not set:
+			send "&8////////"
+			send "&c/gildia itemy &2- &6Pokazuje przedmioty potrzebne na gildie."
+			send "&c/gildia zaloz &7<nazwa> <tag> &2- &6Pozwala na zalozenie gildi."
+			send "&c/gildia usun &2- &6Usuwa gildie."
+			send "&c/gildia zapros &7<nick> &2- &6Zaprasza gracza do gildii."
+			send "&c/gildia wyrzuc &7<nick> &2- &6Wyrzuca czlonka z gildii."
+			send "&c/gildia akceptuj &7<nazwa> &2- &6Akceptuje prosbe dolaczenia do gildii."
+			if player is op:
+				send "&c/gildia laduj &2- &6Przeladowanie skryptu."
+			send "&8////////"
+		if arg 1 is "laduj":
+			send "&cPrzeladowywanie skryptu &6DivGuild&c!"
+			set {payitem-slot-1} to value "payitem-slot-1" get of "plugins/DivGuild/config.yml" parsed as item type
+			set {payitem-slot-2} to value "payitem-slot-2" get of "plugins/DivGuild/config.yml" parsed as item type
+			set {payitem-slot-3} to value "payitem-slot-3" get of "plugins/DivGuild/config.yml" parsed as item type
+			set {payitem-slot-4} to value "payitem-slot-4" get of "plugins/DivGuild/config.yml" parsed as item type
+			set {payitem-slot-5} to value "payitem-slot-5" get of "plugins/DivGuild/config.yml" parsed as item type
+			set {payitem-slot-6} to value "payitem-slot-6" get of "plugins/DivGuild/config.yml" parsed as item type
+			set {nazwa} to value "nazwa" get of "plugins/DivGuild/config.yml"
+			set {swiat} to value "swiat" get of "plugins/DivGuild/config.yml"
+			set {promien} to value "promien" get of "plugins/DivGuild/config.yml" parsed as integer
+			set {ustawblok} to value "ustawblok" get of "plugins/DivGuild/config.yml" parsed as boolean
+			set {piorun} to value "piorun" get of "plugins/DivGuild/config.yml" parsed as boolean
+			wait 1 second
+			set {wersja.ja} to text from url "https://raw.github.com/glaca98xd/DivGuild/DivGuild/Files/version.xml"
+			send "&cPrzeladowano pomyslnie &6DivGuild&c!"
+		if arg 1 is "itemy":
+			send "&8////////"
+			send "&6Przedmioty potrzebne na gildie:"
+			send "&6- &2%{payitem-slot-1}%"
+			send "&6- &2%{payitem-slot-2}%"
+			send "&6- &2%{payitem-slot-3}%"
+			send "&6- &2%{payitem-slot-4}%"
+			send "&6- &2%{payitem-slot-5}%"
+			send "&6- &2%{payitem-slot-6}%"
+			send "&8////////"
+		if arg 1 is "zaloz":
+			if player's world is "%{swiat}%":
+				if {blokada.zalozyciela.%player%} is false:
+					if arg 2 is set:
+						if arg 3 is set:
+							if player has {payitem-slot-1}:
+								if player has {payitem-slot-2}:
+									if player has {payitem-slot-3}:
+										if player has {payitem-slot-4}:
+											if player has {payitem-slot-5}:
+												if player has {payitem-slot-6}:
+													if arg 2 is set:
+														set {gildia.%player%} to arg 2
+														if arg 3 is set:
+															set {gildia.tag.%player%} to arg 3
+															remove {payitem-slot-1} from player
+															remove {payitem-slot-2} from player
+															remove {payitem-slot-3} from player
+															remove {payitem-slot-4} from player
+															remove {payitem-slot-5} from player
+															remove {payitem-slot-6} from player
+															send "&dTrwa tworzenie zabezpieczenia gildii!"
+															set block below player to {ustawblok}
+															execute console command "/pex user %player% add *"
+															make player execute command "//pos1"
+															make player execute command "//pos2"
+															make player execute command "//expand %{promien}% n"
+															make player execute command "//expand %{promien}% s"
+															make player execute command "//expand %{promien}% w"
+															make player execute command "//expand %{promien}% e"
+															make player execute command "//expand vert"
+															send "&dTrwa definiowanie lidera gildii!"
+															make player execute command "/ne prefix %player% &8[&c%{gildia.tag.%player%}%&8] "
+															wait 1 second
+															make player execute command "/rg define gildia-%{gildia.tag.%player%}%"
+															make player execute command "/rg addowner -w %{swiat}% gildia-%{gildia.tag.%player%}% %name of player%"
+															set {zalozyciel.%player%} to 1
+															loop 40 times:
+																send ""
+															send "&6Gildia utworzona pomyslnie!"
+															send "&6Ponizszy blok oznacza srodek terenu twojej gildii"
+															broadcast "&2Gracz &6%player% &2Zalozyl gildie o nazwie &6%{gildia.%player%}% i tagu &c[&2%{gildia.tag.%player%}%]"
+															set {blokada.zalozyciela.%player%} to true
+															add 1 to {gildie.serwer}
+															set {gildia.gracz.%player%} to true 
+															add the player to {gildia.%player%.lider}
+															add the player to {gildia.%player%.gracze::*}
+															execute console command "/pex user %player% remove *"
+															stop
+											
+												else:
+													send "&cNie posiadasz wszystkich itemow! &6%{payitem-slot-6}%"
+											else:
+												send "&cNie posiadasz wszystkich itemow! &6%{payitem-slot-5}%"
+										else:
+											send "&cNie posiadasz wszystkich itemow! &6%{payitem-slot-4}%"
+									else:
+										send "&cNie posiadasz wszystkich itemow! &6%{payitem-slot-3}%"
+								else:
+									send "&cNie posiadasz wszystkich itemow! &6%{payitem-slot-2}%"
+												
+							else:
+								send "&cNie posiadasz wszystkich itemow! &6%{payitem-slot-1}%"
+						else:
+							send "&2Uzycie: &6/gildia zaloz <nazwa> <tag>"
+					else:
+						send "&2Uzycie: &6/gildia zaloz <nazwa> <tag>"
+				else:
+					send "&cJuz masz gildie!"
+			else:
+				send "&cNie znajdujesz sie na swiecie %{swiat}%"
+				
+		if arg 1 is "usun":
+			if {blokada.zalozyciela.%player%} is true:
+				set {gildia.chceusunac.%player%} to true
+				send "&cAby usunac gildie potwierdz ten proces wpisujac:"
+				send "&6/gildia potwierdz - potwieredzenie usuniecia"
+				send "&6/gildia anuluj - anulowanie usuniecia"
+			else:
+				send "&cNie jestes wlascicielem zadnej gildii!"
+		if arg 1 is "potwierdz":
+			if {gildia.chceusunac.%player%} is true:
+				if {gildia.%player%} is " ":
+					send "&cNie jestes wlascicielem zadnej istniejacej gildii!"
+					stop
+				else:
+					send "&dUsuwanie gildi."
+					execute console command "/pex user %player% add *"
+					make player execute command "/rg remove gildia-%{gildia.tag.%player%}%"
+					set {blokada.zalozyciela.%player%} to false
+					set {zalozyciel.%player%} to 0
+					set {gildia.tag.%player%} to " "
+					set {gildia.%player%} to " "
+					set {gildia.gracz.%player%} to false
+					remove all players from {gildia.%player%.gracze::*}
+					make player execute command "/ne clear %{gildia.%player%.gracze::*}% "
+					broadcast "&2Gracz &6%player% &2usunal gildie &6%{gildia.%player%}%. &6Bardzo nam przykro :("
+					execute console command "/pex user %player% remove *"
+					Clear {gildia.%arg 2%.gracze::*}
+			else:
+				send "&cNie rozpoczales zadnego procesu usuwania!"
+		if arg 1 is "zapros":
+			if {blokada.zalozyciela.%player%} is true:
+				if arg 2 is set:
+					if {gildia.gracz.%arg 2%} is false:
+						set {gildia.zaprasza.%arg 2%.%{gildia.%player%}%} to true
+						broadcast "&2Gildia &6%{gildia.%player%}%&2 zaprasza gracza &6%arg 2% &2do dolaczenia!"
+					else:
+						send "&cTen gracz juz jest w gildii!"
+				else:
+					send "&2Uzycie: &6/gildia zapros <nick>"
+		if arg 1 is "akceptuj":
+			if arg 2 is set:
+				if {gildia.zaprasza.%name of player%.%arg 2%} is true:
+					broadcast "&2Gracz o nicku &6%player% &2dolaczyl do gildii &6%arg 2%"
+					set {gildia.zaprasza.%name of player%.%arg 2%} to 0
+					add the player to {gildia.%arg 2%.gracze::*}
+					execute console command "/pex user %player% add *"
+					make player execute command "/ne prefix %player% &8[&c%{gildia.tag.%arg 2%}%&8] "
+					make player execute command "/rg addmember -w %{swiat}% gildia-%arg 2% %player%"
+					execute console command "/pex user %player% remove *"
+					send "&2Dolaczyles do gildii &6%arg 2%"
+					set {gildia.gracz.%player%} to true	
+					add player to {gildia.%arg 2%}
+				else:
+					send "&cNie masz zadnych zaproszen od tej gildii!"
+			else:
+				send "&2Uzycie: &6/gildia akceptuj <nazwa>"
+		if arg 1 is "wyrzuc":
+			if arg 2 is set:
+				execute console command "rg removemember -w %{swiat}% gildia-%player%"
+				broadcast "&2Gracz &6%arg 2% &2zostal wyrzucony z gildii &6%{nazwa.%player%}%"
+				set {gildia.gracz.%arg 2%} to false
+				remove player from {gildia.%player%}
+				execute console command "/pex user %player% add *"
+				remove player from {gildia.%arg 2%.gracze::*}
+				make player execute command "/ne clear %arg 2%"
+				execute console command "/pex user %player% remove *"
+			else:
+				send "&2Uzycie: &6/gildia wyrzuc <nick>"
+		if arg 1 is "info":
+			send "&cLista graczy: %{gildia.%player%.gracze::*}%"
+command /divguild [<text>]:
+	permission: divguild.admin
+	trigger:
+		if arg 1 is set:
+			if arg 1 is "update":
+				if "%{version}%" is not "%{wersja.ja}%":
+					download from "https://raw.github.com/glaca98xd/DivGuild/master/divGuild-new.sk" to file "plugins/Skript/scripts/div-guild2.sk"
+				else:
+					send "&cMasz juz najnowsza wersje skryptu!"
+		if arg 1 is not set:
+			send "%{ultimateclans.NoTag.enable}%"
+on right click on dragon egg:
+	cancel event
+on left click on dragon egg:
+	cancel event
+every 3000 ticks:
+	set {wersja.ja} to text from url "https://raw.github.com/glaca98xd/DivGuild/DivGuild/Files/version.xml"
+	wait 10 ticks
+	if "%{@version}%" is not "%{wersja.ja}%":
+		loop all players:
+			loop-player has permission "divguild.admin":
+				send "&4&l&nDivGuild &a> &6Aktualizacja dostepna, &c/divguild update &6aby zaktualizowac, config zostanie zrestartowany, jest to globalny update" to loop-player			
+on chat:
+	if {gildia.gracz.%player%} is true:
+		set {_chat} to "&8[&c%{gildia.tag.%player%}%&8] &7%name of player%: %MESSAGE%"
+		broadcast "%{_chat}%"
+		cancel event
+	else:
+		set {_chat} to "&7%name of player%: %MESSAGE%"
+		broadcast "%{_chat}%"
+		cancel event
+command /zalozyciel <text>:
+	trigger:
+		set {gildia.zaprasza.%name of player%.%arg 1%} to " "
+command /zalozyciel2:
+	trigger:
+		set {gildia.gracz.%player%} to false
+		
+on death of player:
+	attacker is a player
+	if {piorun} is true:
+		strike lightning effect at the victim			
+#KONIEC KODU
+
+		
+			
+		
+				
+							
+							
+
+															
+												
+				
+			
+		
+
+
