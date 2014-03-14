@@ -1,0 +1,26 @@
+#+------------------------------+#
+#         CONFIG DIVGUILD        #
+#+------------------------------+#
+
+#+Nazwa pliku zawierajacego skrypt+#
+   nazwa: DivGuild
+   version: 0.7
+#+Nazwa swiata na ktorym ma byc dzwolone tworzenie gildii+#
+   swiat: lobby
+#+Cuboidy+#
+#Promien to polowa cuboida jesli dasz 25 to cuboid bedzie 50x50, jesli 50 cuboid bedzie 100x100
+#Ustaw blok to blok ktory stawia sie automatycznie po stworzeniu gildi
+   promien: 25
+   ustawblok: dragon egg
+#+Itemy potrzebne na gildie+#
+   payitem-slot-1: 64 diamond 
+   payitem-slot-2: 64 stone
+   payitem-slot-3: 64 stone
+   payitem-slot-4: 64 stone
+   payitem-slot-5: 64 stone
+   payitem-slot-6: 64 stone
+#+Eventy+#
+#Piorun po smierci
+   piorun: true
+
+ 
