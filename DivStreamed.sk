@@ -11,8 +11,6 @@
 #= OWY SKRYPT JEST TYLKO PROJEKTEM KTÓRY NIE =
 #= MIAŁ UJŻEĆ ŚWIATŁA DZIENNEGO! =
 #============================================
-options:
-	version: 0.7
 #====================KOD=====================
 		
 
@@ -37,6 +35,14 @@ on script load:
 		send "[divGuild] Folder divGuildLOG nie istnieje... Generowanie..." to console
 		generate folder named "plugins/divGuildLOG"
 		send "[divGuild] Wygenerowano!" to console
+		
+	if folder in "plugins/DivGuild" is not exists:
+		generate folder named "plugins/DivGuild"
+		send "[Div] &aData successfully!" to console
+	
+	if file in "plugins/DivGuild/config.yml" is not exists:
+		download from "https://raw.github.com/glaca98xd/DivGuild/master/config.yml" to file "plugins/DivGuild/config.yml"
+
 	send "===========================" to the console
 	send "==       +DivGuild+      ==" to the console
 	send "===========================" to the console
