@@ -26,8 +26,9 @@ on skript load:
 	set {promien} to value "promien" get of "plugins/DivGuild/config.yml" parsed as integer
 	set {ustawblok} to value "ustawblok" get of "plugins/DivGuild/config.yml" parsed as boolean
 	set {piorun} to value "piorun" get of "plugins/DivGuild/config.yml" parsed as boolean
+	set {tntobsidian} to value "tntobsidian" get of "plugins/DivGuild/config.yml" parsed as boolean
 	set {version} to value "version" get of "plugins/DivGuild/config.yml" parsed as integer
-	set {wersja.ja} to text from url "https://raw.github.com/glaca98xd/DivGuild/DivGuild/Files/version.xml"
+	
 on script load:
 	set {payitem-slot-1} to {payitem-slot-1.fromConfig}
 				
@@ -74,6 +75,9 @@ command /gildie [<text>] [<text>] [<text>]:
 			set {promien} to value "promien" get of "plugins/DivGuild/config.yml" parsed as integer
 			set {ustawblok} to value "ustawblok" get of "plugins/DivGuild/config.yml" parsed as boolean
 			set {piorun} to value "piorun" get of "plugins/DivGuild/config.yml" parsed as boolean
+			set {tntobsidian} to value "tntobsidian" get of "plugins/DivGuild/config.yml" parsed as boolean
+			set {version} to value "version" get of "plugins/DivGuild/config.yml" parsed as integer
+	
 			wait 1 second
 			send "&cPrzeladowano pomyslnie &6DivGuild&c!"
 		if arg 1 is "itemy":
