@@ -75,7 +75,6 @@ command /gildie [<text>] [<text>] [<text>]:
 			set {ustawblok} to value "ustawblok" get of "plugins/DivGuild/config.yml" parsed as boolean
 			set {piorun} to value "piorun" get of "plugins/DivGuild/config.yml" parsed as boolean
 			wait 1 second
-			set {wersja.ja} to text from url "https://raw.github.com/glaca98xd/DivGuild/DivGuild/Files/version.xml"
 			send "&cPrzeladowano pomyslnie &6DivGuild&c!"
 		if arg 1 is "itemy":
 			send "&8////////"
@@ -243,14 +242,7 @@ command /divguild [<text>]:
 on right click on dragon egg:
 	cancel event
 on left click on dragon egg:
-	cancel event
-every 3000 ticks:
-	set {wersja.ja} to text from url "https://raw.github.com/glaca98xd/DivGuild/DivGuild/Files/version.xml"
-	wait 10 ticks
-	if "%{@version}%" is not "%{wersja.ja}%":
-		loop all players:
-			loop-player has permission "divguild.admin":
-				send "&4&l&nDivGuild &a> &6Aktualizacja dostepna, &c/divguild update &6aby zaktualizowac, config zostanie zrestartowany, jest to globalny update" to loop-player			
+	cancel event			
 on chat:
 	if {gildia.gracz.%player%} is true:
 		set {_chat} to "&8[&c%{gildia.tag.%player%}%&8] &7%name of player%: %MESSAGE%"
